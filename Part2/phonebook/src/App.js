@@ -75,6 +75,6 @@ console.log("phonebook basics, adding names, Ex. 2.6")
 console.log("check if name is already on list, Ex. 2.7")
 console.log("add number, ex. 2.8")
 console.log("Search box, Ex. 2.9")
-console.log("refactored")
+console.log("refactored, Ex 2.10")
 
 export default App
