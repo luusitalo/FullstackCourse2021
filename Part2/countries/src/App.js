@@ -17,6 +17,7 @@ const App = () => {
    
   useEffect(hook, [])
   
+ 
   const handleSearched = (event) =>  {
     console.log("Search value:", searched)
     event.preventDefault()
@@ -26,11 +27,8 @@ const App = () => {
   const matches = countries.filter(country =>
         country.name.toLowerCase().includes(searched.toLowerCase())             
   )
-  const matchLen = matches.length
-  console.log("matches:", matches)
-  console.log("matchLen:", matchLen)
 
-
+ 
   const Countries = ({ matches }) => {
    
     if (matches.length > 10) {
@@ -43,13 +41,16 @@ const App = () => {
 
     else {
       return (
-        <ul>
-          {matches.map(country => 
-            <li> {country.name} </li>
-          )}
-        </ul>
-    )
-      }
+      <ul>
+      {matches.map(match => 
+        <li> 
+          {match.name} 
+          <button type = "submit" onClick = {() => {setSearched(match.name)}}> Show </button>  
+        </li>      
+      )}
+      </ul>  
+      )
+    }
   
   }
 
