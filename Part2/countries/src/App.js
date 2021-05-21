@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
-function App() {
+
+const App = () => {
+  const [ countries, setCountries ] = useState([ ])
+  const [ searched, setSearched ] = useState('')
+
+  const hook = () => {
+    console.log('effect')
+    axios
+      .get('https://restcountries.eu/rest/v2/all')
+      .then(response => {
+        console.log('promise fulfilled')
+        setCountries(response.data)
+      })
+  }
+   
+  useEffect(hook, [])
+  
+  const handleSearched = (event) =>  {
+    event.preventDefault()
+    setSearched(event.target.value)
+  }
+
+   const matches = countries.filter(person => 
+    person.name.toLowerCase().includes(searched.toLowerCase()))
+
+    const Countries = ({ countries }) => {
+      return (
+        <ul>
+        {countries.map(country => 
+          <Country key={ country.name } country={ country } />
+        )}
+        </ul>
+      )
+    }
+
+    const Country = ({ country }) => {
+      //now returning only name, preparing to return other info too
+      return (
+        <li>{country.name}</li>
+      )
+    }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h2>Country information</h2>
+      <div>
+        Find countries <input value={searched} onChange={handleSearched} />
+      </div>
+      
+     <div>
+       <Countries countries = {matches} />
+     </div>
+
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
