@@ -26,14 +26,19 @@
       "id": 5
     },
     {
-      "name": "Leonardo da Vinci",
-      "number": "987654",
+      "name": "Hedy Lamarr",
+      "number": "474683",
       "id": 6
     },
     {
-      "name": "Hedy Lamarr",
-      "number": "345-678",
-      "id": 7
+      "name": "Antero Vipunen",
+      "number": "456789",
+      "id": 8
+    },
+    {
+      "name": "Gurulan kahvinkeitin",
+      "number": "56732347",
+      "id": 9
     }
   ]
 }

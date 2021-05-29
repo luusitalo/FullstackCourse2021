@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import Persons from './components/Persons'
 import IsDuplicate from './components/IsDuplicate'
 import EntryService from './services/handleEntries'
@@ -13,17 +12,18 @@ const App = () => {
 
   
   useEffect(() => {
-    EntryService
+      EntryService
     .getAll()
     .then(phonebook => {
       setPersons(phonebook)
     })
   }, []) 
 
-  const addPerson = (event) => {
+
+   const addPerson = (event) => {
     event.preventDefault()
-   // if name is already in the phonebook, issue a warning
   
+    // if name is already in the phonebook, issue a warning
    IsDuplicate(persons, newName)
      ? window.alert(`${newName} is already added to phonebook`)
      : (EntryService
@@ -49,9 +49,10 @@ const App = () => {
   }
 
    const matches = persons.filter(person => 
-    person.name.toLowerCase().includes(searched.toLowerCase()))
-
-  return (
+    person.name.toLowerCase().includes(searched.toLowerCase())
+    )
+    
+    return (
     <div>
       <h2>Phonebook</h2>
       <div>
@@ -73,7 +74,7 @@ const App = () => {
       <h3>Numbers</h3>
      <div>
        <Persons persons = {matches} />
-     </div>
+      </div>
 
     </div>
   )
@@ -87,5 +88,6 @@ console.log("refactored, Ex 2.10")
 console.log("using db.json and effect hook, Ex 2.11")
 console.log("adding the new entries to the backend server, Ex. 2.15")
 console.log("refactored the backend communication services, Ex. 2.16")
+console.log("delete buttons added, Ex. 2.17. Reloads the whole page torefresh after remove though...")
 
 export default App

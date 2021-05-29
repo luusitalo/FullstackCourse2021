@@ -1,8 +1,12 @@
-const Person = ({ person }) => {
-    //now returning only name, preparing to return other info too
-    return (
-      <li>{person.name}: {person.number}</li>
-    )
-  }
+import RemoveService from '../services/remover'
 
-  export default Person
+const Person = ({ person }) => {
+  return (
+   <li>
+      {person.name}: {person.number}  &nbsp; 
+      <button type = "submit" onClick = {() => {RemoveService.removeEntry(person)}}> delete </button> 
+    </li>
+  )
+}
+
+export default Person
