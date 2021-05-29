@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Persons from './components/Persons'
 import IsDuplicate from './components/IsDuplicate'
+import EntryService from './services/handleEntries'
 
 
 const App = () => {
@@ -10,18 +11,14 @@ const App = () => {
   const [ newNumber, setNewNumber ] = useState('')
   const [searched, setSearched ] = useState('')
 
-  const hook = () => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersons(response.data)
-      })
-  }
-   
-  useEffect(hook, [])
-
+  
+  useEffect(() => {
+    EntryService
+    .getAll()
+    .then(phonebook => {
+      setPersons(phonebook)
+    })
+  }, []) 
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -29,7 +26,11 @@ const App = () => {
   
    IsDuplicate(persons, newName)
      ? window.alert(`${newName} is already added to phonebook`)
-     : setPersons(persons.concat({ name: newName, number: newNumber } ))
+     : (EntryService
+        .create( { name: newName, number: newNumber } )
+        .then(response => {
+          setPersons(persons.concat({ name: newName, number: newNumber } ))
+        }))
     setNewName('')
     setNewNumber('')
   }
@@ -84,5 +85,7 @@ console.log("add number, ex. 2.8")
 console.log("Search box, Ex. 2.9")
 console.log("refactored, Ex 2.10")
 console.log("using db.json and effect hook, Ex 2.11")
+console.log("adding the new entries to the backend server, Ex. 2.15")
+console.log("refactored the backend communication services, Ex. 2.16")
 
 export default App
