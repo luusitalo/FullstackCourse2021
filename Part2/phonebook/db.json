@@ -37,8 +37,23 @@
     },
     {
       "name": "Gurulan kahvinkeitin",
-      "number": "56732347",
+      "number": "8657403",
       "id": 9
+    },
+    {
+      "name": "testityyppä",
+      "number": "9876",
+      "id": 10
+    },
+    {
+      "name": "abc-kiria",
+      "number": "123",
+      "id": 11
+    },
+    {
+      "name": "Mikael Agricola",
+      "number": "784563",
+      "id": 12
     }
   ]
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Persons from './components/Persons'
 import IsDuplicate from './components/IsDuplicate'
 import EntryService from './services/handleEntries'
+import NotificationService from './services/notification'
 
 
 const App = () => {
@@ -9,7 +10,8 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [searched, setSearched ] = useState('')
-
+  const [successMessage, setSuccessMessage] = useState(null)
+ 
   
   useEffect(() => {
       EntryService
@@ -30,6 +32,12 @@ const App = () => {
         .create( { name: newName, number: newNumber } )
         .then(response => {
           setPersons(persons.concat({ name: newName, number: newNumber } ))
+          setSuccessMessage(
+            `'${newName}' has been added to the phonebook`
+          )
+          setTimeout(() => {
+            setSuccessMessage(null)
+          }, 2000)
         }))
     setNewName('')
     setNewNumber('')
@@ -55,6 +63,7 @@ const App = () => {
     return (
     <div>
       <h2>Phonebook</h2>
+      <NotificationService.notification message={successMessage} />
       <div>
         Filter: <input value={searched} onChange={handleSearched} />
       </div>
@@ -88,6 +97,7 @@ console.log("refactored, Ex 2.10")
 console.log("using db.json and effect hook, Ex 2.11")
 console.log("adding the new entries to the backend server, Ex. 2.15")
 console.log("refactored the backend communication services, Ex. 2.16")
-console.log("delete buttons added, Ex. 2.17. Reloads the whole page torefresh after remove though...")
+console.log("delete buttons added, Ex. 2.17. Reloads the whole page to refresh after remove though...")
+console.log("Adding a successful add message, Ex. 2.19")
 
 export default App
